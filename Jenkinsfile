@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'sathiya', usernameVariable: 'sathiya9944', passwordVariable: 'GIT_TOKEN')]) {
+                withCredentials([usernamePassword(credentialsId: 'sathiya', usernameVariable: 'GIT_USER', passwordVariable: 'GIT_TOKEN')]) {
                     git url: "https://$GIT_USER:$GIT_TOKEN@github.com/sathiya9944/jenkins-docker.git", branch: 'main'
                 }
             }
@@ -23,7 +23,7 @@ pipeline {
 
         stage('Login to Docker Registry') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'sathiya9944', usernameVariable: 'sathiya9944', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'sathiya9944', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
                 }
             }
